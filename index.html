@@ -1,0 +1,119 @@
+<!doctype html>
+<!-- stripped and modified basis fo the paul irish html5 boilerplate (in particular:
+https://raw.github.com/paulirish/html5-boilerplate/master/index.html) -->
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <link rel="stylesheet/less" type="text/css" href="css/slider.less">
+    <script src="js/less-1.2.0.min.js" type="text/javascript"></script>
+    <script defer src="js/jquery.udoxslider.js"></script>
+    <script>
+    jQuery(document).ready(function() {
+        jQuery('.slideme').udoxslider({
+            'globalDuration' : 20000,
+            'direction' : 'left',
+            'liHeight' : 300,
+            'liWidth' : 940,
+            'offset' : 3,
+            'masks' : 'true',
+            'mask_hover' : 'true',
+            'peak_size' : 27,
+            'direction_arrows' : 'true',
+            'pagination' : 'true'
+        });
+    });
+    </script>
+</head>
+<body>
+<!-- SLider should be wrapped, can be called anything  -->
+<div id="contain_slider">
+    <!-- the class slideme should not be changed, this is the start of the un-ordred list which contains each slide. -->
+    <ul class="slideme">
+        <!-- Each li represents a slide within the udox slider -->
+        <li class="current">
+            <!-- The image-data class holds the image which will be displayed in that slide, do not change the name of this class  -->
+        <a href="">
+            <div class="image-data">
+                <img src="http://placehold.it/940x300/000" />
+            </div>
+            <div class="featureText">
+                <h3>Title</h3>
+                <p>Add text here</p>
+            </div>
+        </a>
+        </li>
+        <li>
+            <a href="">
+                <div class="image-data">
+                    <img src="http://placehold.it/940x300/fff" />
+                </div>
+                <div class="featureText">
+                    <h3>Title</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <div class="image-data">
+                    <img src="http://placehold.it/940x300/rrr" />
+                </div>
+                <div class="featureText">
+                    <h3>Title</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <div class="image-data">
+                    <img src="http://placehold.it/940x300/ttt" />
+                </div>
+                <div class="featureText">
+                    <h3>Title</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <div class="image-data">
+                    <img src="http://placehold.it/940x300/000" />
+                </div>
+                <div class="featureText">
+                    <h3>Title</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <div class="image-data">
+                    <img src="http://placehold.it/940x300/fff" />
+                </div>
+                <div class="featureText">
+                    <h3>Title</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <div class="image-data">
+                    <img src="http://placehold.it/940x300/rrr" />
+                </div>
+                <div class="featureText">
+                    <h3>Title</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+</html>
