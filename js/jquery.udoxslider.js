@@ -18,7 +18,7 @@
         //Variables
         var mainContainer = $(this);
         var mainContainerParent = mainContainer.parent();
-        var slideLi = $(this).children('.item');
+        var slideLi = $(this).children();
         var liCount = slideLi.length;
         var windowSize = $('body').width();
         var slidemeWidth = (liCount*settings['liWidth']);
@@ -148,7 +148,7 @@
 
         function findMiddle() {
             //Finds the middle slide and adds a class to it
-            var sourceSlide = mainContainer.children(".item:nth-child(" + middleList() + ")");
+            var sourceSlide = mainContainer.children(slideLi + ":nth-child(" + middleList() + ")");
             var slideContent = $(sourceSlide).find(".image-data").html();
 
             sourceSlide.addClass('current');
@@ -159,7 +159,7 @@
 
         function findFeatureText() {
             //Finds the featured text for the current slide
-            var sourceSlide = mainContainer.children(".item:nth-child(" + (middleList() + settings['offset']) + ")");
+            var sourceSlide = mainContainer.children(slideLi + ":nth-child(" + (middleList() + settings['offset']) + ")");
             var textContent = $(sourceSlide).find(".featureText");
 
             return(textContent);
@@ -213,7 +213,7 @@
         }
 
         function moveSlide(dir, n) {
-            var slideLi = $(mainContainer).children('.item');
+            var slideLi = $(mainContainer).children();
             //Decides which way slider is moving and append or preends appropriatly
             if(n===undefined) {
                 n = 1;
