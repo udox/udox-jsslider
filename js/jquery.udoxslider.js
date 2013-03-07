@@ -18,7 +18,7 @@
         //Variables
         var mainContainer = $(this);
         var mainContainerParent = mainContainer.parent();
-        var slideLi = $(this).children('li');
+        var slideLi = $(this).children('.item');
         var liCount = slideLi.length;
         var windowSize = $('body').width();
         var slidemeWidth = (liCount*settings['liWidth']);
@@ -113,9 +113,8 @@
         }
         slideInit();
 
-        function showPagSlide() {
+        function showPagSlide(active_slide) {
             if(settings['pagination']=='true') {
-                //find current pag number 
                 var currentSlide = (active_slide).replace(/[^\d]/g, '');
                 var findMe = $(".notCurrent-"+currentSlide);
                 $(findMe).addClass("current");
@@ -149,7 +148,7 @@
 
         function findMiddle() {
             //Finds the middle slide and adds a class to it
-            var sourceSlide = mainContainer.children("li:nth-child(" + middleList() + ")");
+            var sourceSlide = mainContainer.children(".item:nth-child(" + middleList() + ")");
             var slideContent = $(sourceSlide).find(".image-data").html();
 
             sourceSlide.addClass('current');
@@ -160,7 +159,7 @@
 
         function findFeatureText() {
             //Finds the featured text for the current slide
-            var sourceSlide = mainContainer.children("li:nth-child(" + (middleList() + settings['offset']) + ")");
+            var sourceSlide = mainContainer.children(".item:nth-child(" + (middleList() + settings['offset']) + ")");
             var textContent = $(sourceSlide).find(".featureText");
 
             return(textContent);
@@ -197,7 +196,7 @@
                 }
                 findMiddle();
                 findFeatureText();
-                showPagSlide();
+                showPagSlide(active_slide);
                 $('#next_slide').click(nextClickHandler);
                 $('#prev_slide').click(prevClickHandler);
                 $('#mask-left').bind("mouseenter", hoverLeftEnter).bind("mouseleave", hoverLeftLeave);
@@ -214,16 +213,17 @@
         }
 
         function moveSlide(dir, n) {
+            var slideLi = $(mainContainer).children('.item');
             //Decides which way slider is moving and append or preends appropriatly
             if(n===undefined) {
                 n = 1;
             }
             if (dir === 'left') {
-                $(mainContainer).append($('.slideme li').slice(0, n));
+                $(mainContainer).append($(slideLi).slice(0, n));
                 $(mainContainer).css('left', '+='+n*settings['liWidth']+'px');
             }
             if (dir === 'right') {
-                $(mainContainer).prepend($('.slideme li').slice(-1*n));
+                $(mainContainer).prepend($(slideLi).slice(-1*n));
                 $(mainContainer).css('left', '-='+n*settings['liWidth']+'px');
             }
         }
