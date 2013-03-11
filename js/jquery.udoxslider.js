@@ -142,7 +142,7 @@
 
         function findMiddle() {
             //Finds the middle slide and adds a class to it
-            var sourceSlide = mainContainer.children(slideLi + ":nth-child(" + middleList() + ")");
+            var sourceSlide = mainContainer.children("div:nth-child(" + middleList() + ")");
             var slideContent = $(sourceSlide).find(".image-data").html();
 
             sourceSlide.addClass('current');
@@ -153,7 +153,7 @@
 
         function findFeatureText() {
             //Finds the featured text for the current slide
-            var sourceSlide = mainContainer.children(slideLi + ":nth-child(" + (middleList() + settings['offset']) + ")");
+            var sourceSlide = mainContainer.children("div:nth-child(" + middleList() + ")");
             var textContent = $(sourceSlide).find(".featureText");
 
             return(textContent);
