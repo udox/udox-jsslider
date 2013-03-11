@@ -89,3 +89,21 @@ There are many options you can add to the above code, they are listed below with
 
 
 The slider will not sit centrally unless body has margings set to 0, this is already set in our CSS
+
+
+## JS 1.9 IE fix
+
+Add this to the head of your HTML document:
+<!--[if IE 8]>
+    <style type="text/css">
+        body {
+            overflow-y: scroll;
+        }
+    </style>
+<![endif]-->
+
+And this can be removed from the JS:
+//Scroll bar appears just in IE8, to fix random bug
+if ($.browser.msie  && parseInt($.browser.version, 10) === 8) {
+  $('body').css('overflow-y','scroll');
+} 

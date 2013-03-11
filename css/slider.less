@@ -13,49 +13,8 @@ body { margin:0px; }
         height: 100%;
         display: block;
     }
-    .sliderPag { 
-        z-index: 999;
-        position: absolute;
-        padding: 0px;
-        margin-left: 0px;
-        top: 254px;
-        right: 820px;
-        li {
-            float: left;
-            height: 22px;
-            width: 22px;
-            margin-right: 8px;
-        }
-        .slide-jump {
-            font-size: 10px;
-            display: block;
-            float: left;
-            padding: 6px 8px 6px 9px;
-            margin-right: 4px;
-            line-height: 10px;
-            background-image: url('../img/pag.png');
-            color: #fff;
-        }
-        .current a {
-            background-image: url('../img/pag_current.png');
-            color: #000;
-        }
-    }
-    .mask { 
-        position: absolute; 
-        background-color: #fff; 
-        opacity: 0.6; 
-        filter: alpha(opacity=50);
-        z-index: 150; 
-    }
-    #mask-left { 
-        left: 0px; 
-    }
-    #mask-right { 
-        right: 0px; 
-    }
     .carousel-inner { 
-        position:relative; 
+        position:absolute; 
         padding: 0px; 
         margin-top: 0px;
         .item {
@@ -83,27 +42,77 @@ body { margin:0px; }
             margin:0 auto;
         }
     }
-    .udox-slider-nav {
-        margin: 0 auto;
-        width: 940px;
-        height: 300px;
-        z-index: 9999;
-        a {
-            position: relative;
-            top: -190px;
-            width: 28px;
-            height: 84px;
-            display: block;
-            background: url('../img/direction_nav_sprite.png') no-repeat 0 0;
-            cursor: pointer;
-            z-index: 9999;
-        }
-        #prev_slide {
-            float: left;
-        }
-        #next_slide {
-            background-position: -27px 0;
-            float: right;
-        }
+}
+.flex-direction-nav {
+    position: relative;
+    top: 186px;
+    width: 28px;
+    height: 84px;
+    display: block;
+    background: url('../img/direction_nav_sprite.png') no-repeat 0 0;
+    cursor: pointer;
+    z-index: 119;
+}
+#prev_slide {
+    float: left;
+    left: 0px;
+}
+#next_slide {
+    background-position: -27px 0;
+    float: right;
+    right: -179px;
+}
+.mask {
+    position: absolute;
+    height: 503px;
+    background-color: #fff;
+    top: 0px;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    z-index: 100;
+    cursor: pointer;
+}
+#mask-left {
+    float: left;
+    left: 0px;
+}
+#mask-right {
+    float: right;
+    right: 0px;
+}
+.sliderPag { 
+    float: right;
+    height: 30px;
+    z-index: 999;
+    position: relative;
+    padding: 0px;
+    margin-left: 0px;
+    top: 524px;
+    right: 100px;
+    li {
+        list-style: none;
+        float: left;
+        height: 22px;
+        width: 22px;
+        margin-right: 8px;
     }
+    .slide-jump {
+        font-size: 10px;
+        display: block;
+        float: left;
+        padding: 6px 8px 6px 9px;
+        margin-right: 4px;
+        line-height: 10px;
+        background-image: url('../img/pag.png');
+        color: #fff;
+    }
+    .current a {
+        background-image: url('../img/pag_current.png');
+        color: #000;
+    }
+}
+
+//Only used to keep nav and pag in the same place
+.outer-layer {
+    height: 620px;
 }

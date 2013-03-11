@@ -43,11 +43,6 @@
             'height' : +settings['liHeight']+'px'
         });
 
-        //Scroll bar appears just in IE8, to fix random bug
-        if ($.browser.msie  && parseInt($.browser.version, 10) === 8) {
-          $('body').css('overflow-y','scroll');
-        }
-
         //Function called after page loads
         $(window).load(
             function() {
@@ -80,8 +75,8 @@
 
             if(settings['masks']=='true') {
                 //Create masks to make edges opaque
-                mainContainerParent.prepend('<div class="mask" id="mask-left"></div>');
-                mainContainerParent.prepend('<div class="mask" id="mask-right"></div>');
+                mainContainerParent.parent().parent().prepend('<div class="mask" id="mask-left"></div>');
+                mainContainerParent.parent().parent().prepend('<div class="mask" id="mask-right"></div>');
                 $(".mask").css({'width':+centerView+'px'}); 
                 $(".mask").css({'height':+settings['liHeight']+'px'});
                 $('#mask-left').bind("mouseenter", hoverLeftEnter).bind("mouseleave", hoverLeftLeave);
@@ -90,14 +85,13 @@
 
             if(settings['direction_arrows']=='true') {
                 //Create navigation arrows
-                mainContainerParent.append('<div class="udox-slider-nav"></div>');
-                $('.udox-slider-nav').append('<a href="#" id="prev_slide"></a>');
-                $('.udox-slider-nav').append('<a href="#" id="next_slide"></a>');
+                mainContainerParent.parent().prepend('<a href="#" class="flex-direction-nav" id="prev_slide"></a>');
+                mainContainerParent.parent().prepend('<a href="#" class="flex-direction-nav" id="next_slide"></a>');
             }
 
             if(settings['pagination']=='true') {
                 // Create a container for direct slide links
-                mainContainerParent.prepend('<ul class="'+paginator_id+'"></ul>');
+                mainContainerParent.parent().prepend('<ul class="'+paginator_id+'"></ul>');
 
                 // Loop over each slide, add a class to ref. it and a link in the paginator
                 var cnt = 1;
