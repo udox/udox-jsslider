@@ -33,12 +33,13 @@
         mainContainer.css({'width':+slidemeWidth+'px'});
         mainContainer.css({'height':+settings['liHeight']+'px'});
         mainContainer.css('left','0px');
+        mainContainer.css('position','relative');
         slideLi.css({'width':+settings['liWidth']+'px', 'height':+settings['liHeight']+'px'});
-        slideLi.css({'display':'block'});
+        //slideLi.css({'display':'block'});
         mainContainerParent.css({
             'overflow-x' : 'hidden',
-            'position' : 'absolute',
-            'left' : '0px',
+            //'position' : 'absolute',
+            //'left' : '0px',
             'width' : '100%',
             'height' : +settings['liHeight']+'px'
         });
@@ -47,23 +48,24 @@
         $(window).load(
             function() {
                 findMiddle();
-                var windowSize = $('body').width();
-                var slide_before_middle = settings['offset']-1;
-                var visble_next_slide = settings['liWidth'] - centerView;
-                var left_spacing = 0-(slide_before_middle*settings['liWidth'])-visble_next_slide;
+                //var windowSize = $('body').width();
+                //var slide_before_middle = settings['offset']-1;
+                //var visble_next_slide = settings['liWidth'] - centerView;
+                //var left_spacing = 0-(slide_before_middle*settings['liWidth'])-visble_next_slide;
+                var left_spacing = - settings['liWidth'] * 2;
                 mainContainer.css({'margin-left': +left_spacing});
             }
         )
 
         //Function called when window is resized
         $(window).resize(function(){
-            var windowSize = $(window).width();
-            mainContainerParent.css({'width': +windowSize});
+            //var windowSize = $(window).width();
+            //mainContainerParent.css({'width': +windowSize});
             var centerView = ((windowSize)-(settings['liWidth']))/2;
-            var slide_before_middle = settings['offset']-1;
-            var visble_next_slide = settings['liWidth'] - centerView;
-            var left_spacing = 0-(slide_before_middle*settings['liWidth'])-visble_next_slide;
-
+            //var slide_before_middle = settings['offset']-1;
+            //var visble_next_slide = settings['liWidth'] - centerView;
+            //var left_spacing = 0-(slide_before_middle*settings['liWidth'])-visble_next_slide;
+            var left_spacing = - settings['liWidth'] * 2;
             mainContainer.css({'margin-left': +left_spacing});
 
             $(".mask").css({'width':+centerView+'px'});
@@ -73,7 +75,7 @@
             // Called when slider first loaded - we need to number our
             // slides for the pagination to work nicely
 
-            if(settings['masks']=='true') {
+            if(settings['masks']==true) {
                 //Create masks to make edges opaque
                 mainContainerParent.parent().parent().prepend('<div class="mask" id="mask-left"></div>');
                 mainContainerParent.parent().parent().prepend('<div class="mask" id="mask-right"></div>');
@@ -83,13 +85,13 @@
                 $('#mask-right').bind("mouseenter", hoverRightEnter).bind("mouseleave", hoverRightLeave);
             }
 
-            if(settings['direction_arrows']=='true') {
+            if(settings['direction_arrows']==true) {
                 //Create navigation arrows
                 mainContainerParent.parent().prepend('<a href="#" class="flex-direction-nav" id="prev_slide"></a>');
                 mainContainerParent.parent().prepend('<a href="#" class="flex-direction-nav" id="next_slide"></a>');
             }
 
-            if(settings['pagination']=='true') {
+            if(settings['pagination']==true) {
                 // Create a container for direct slide links
                 mainContainerParent.parent().prepend('<ul class="'+paginator_id+'"></ul>');
 
@@ -108,7 +110,7 @@
         slideInit();
 
         function showPagSlide(active_slide) {
-            if(settings['pagination']=='true') {
+            if(settings['pagination']==true) {
                 var currentSlide = (active_slide).replace(/[^\d]/g, '');
                 var findMe = $(".notCurrent-"+currentSlide);
                 $(findMe).addClass("current");
@@ -116,7 +118,7 @@
         }
 
         function bindPaginationClick() {
-            if(settings['pagination']=='true') {
+            if(settings['pagination']==true) {
                 //Work out which slide to jump from too
                 var targetSlide = ($(this).attr('id')).replace(/[^\d]/g, '');
                 var currentSlide = (active_slide).replace(/[^\d]/g, '');
@@ -229,7 +231,7 @@
             }, settings['globalDuration']);
         } startCycle();
 
-        if(settings['mask_hover']=='true') {
+        if(settings['mask_hover']==true) {
             //Mask hover action
             var hoverLeftEnter = function(){
                 mainContainer.animate({
