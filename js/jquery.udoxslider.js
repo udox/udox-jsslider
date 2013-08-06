@@ -27,6 +27,7 @@
         var paginator_id = 'sliderPag';
         var active_slide = undefined;
         var cycleTimer;
+        console.log('How man Lis' + liCount);
 
         //Global styles setup
         $.easing.def = "easeInOutCirc";
@@ -51,27 +52,33 @@
         //Function called after page loads
         $(window).load(
             function() {
-                findMiddle();
-                var windowSize = $('body').width();
-                var slide_before_middle = settings['offset']-1;
-                var visble_next_slide = settings['liWidth'] - centerView;
-                var left_spacing = 0-(slide_before_middle*settings['liWidth'])-visble_next_slide;
-                mainContainer.css({'margin-left': +left_spacing});
+                if (liCount > 1) {
+                    findMiddle();
+                    var windowSize = $('body').width();
+                    var slide_before_middle = settings['offset']-1;
+                    var visble_next_slide = settings['liWidth'] - centerView;
+                    var left_spacing = 0-(slide_before_middle*settings['liWidth'])-visble_next_slide;
+                    mainContainer.css({'margin-left': +left_spacing});
+                }else{
+                    mainContainer.addClass('static_one_slide');
+                }
             }
         )
 
         //Function called when window is resized
         $(window).resize(function(){
-            var windowSize = $(window).width();
-            mainContainerParent.css({'width': +windowSize});
-            var centerView = ((windowSize)-(settings['liWidth']))/2;
-            var slide_before_middle = settings['offset']-1;
-            var visble_next_slide = settings['liWidth'] - centerView;
-            var left_spacing = 0-(slide_before_middle*settings['liWidth'])-visble_next_slide;
+            if (liCount > 1) {
+                var windowSize = $(window).width();
+                mainContainerParent.css({'width': +windowSize});
+                var centerView = ((windowSize)-(settings['liWidth']))/2;
+                var slide_before_middle = settings['offset']-1;
+                var visble_next_slide = settings['liWidth'] - centerView;
+                var left_spacing = 0-(slide_before_middle*settings['liWidth'])-visble_next_slide;
 
-            mainContainer.css({'margin-left': +left_spacing});
+                mainContainer.css({'margin-left': +left_spacing});
 
-            $(".mask").css({'width':+centerView+'px'});
+                $(".mask").css({'width':+centerView+'px'});
+            }
         });
 
         function slideInit() {
@@ -167,50 +174,52 @@
         }
 
         function moveSlider(override_dir, step) {
-            //Calls all other functions and actually moves slider
-            if(override_dir==undefined) {
-                move_direction = settings['direction'];
-            } else {
-                move_direction = override_dir;
-            }
-            if(step===undefined) {
-                step = 1;
-            }
-            var method = '-=';
-            if(move_direction==='right') {
-                method = '+=';
-            }
-            clearInterval(cycleTimer);
-            $('#next_slide').unbind('click');
-            $('#prev_slide').unbind('click');
-            $('.'+paginator_id+' li a.slide-jump').unbind('click');
+            if (liCount > 1) {
+                //Calls all other functions and actually moves slider
+                if(override_dir==undefined) {
+                    move_direction = settings['direction'];
+                } else {
+                    move_direction = override_dir;
+                }
+                if(step===undefined) {
+                    step = 1;
+                }
+                var method = '-=';
+                if(move_direction==='right') {
+                    method = '+=';
+                }
+                clearInterval(cycleTimer);
+                $('#next_slide').unbind('click');
+                $('#prev_slide').unbind('click');
+                $('.'+paginator_id+' li a.slide-jump').unbind('click');
 
-            if (step > 1 || step < 1) {
-                moveSlide(move_direction, step);
-            }
-
-            $(mainContainer).animate({
-                'left': method + settings['liWidth'] * step
-            }, 600, 'swing', function() {
-                if (step == 1) {
+                if (step > 1 || step < 1) {
                     moveSlide(move_direction, step);
                 }
-                findMiddle();
-                findFeatureText();
-                showPagSlide();
-                $('#next_slide').click(nextClickHandler);
-                $('#prev_slide').click(prevClickHandler);
-                $('#mask-left').bind("mouseenter", hoverLeftEnter).bind("mouseleave", hoverLeftLeave);
-                $('#mask-right').bind("mouseenter", hoverRightEnter).bind("mouseleave", hoverRightLeave);
-                $('.'+paginator_id+' li a.slide-jump').bind("click", bindPaginationClick);
-            });
-            $(mainContainer).clearQueue();
-            $('#next_slide').clearQueue();
-            $('#prev_slide').clearQueue();
-            $(mainContainer).css('left','0px');
-            $('.'+paginator_id+' li').removeClass("current");
-            slideLi.removeClass("current");
-            startCycle();
+
+                $(mainContainer).animate({
+                    'left': method + settings['liWidth'] * step
+                }, 600, 'swing', function() {
+                    if (step == 1) {
+                        moveSlide(move_direction, step);
+                    }
+                    findMiddle();
+                    findFeatureText();
+                    showPagSlide();
+                    $('#next_slide').click(nextClickHandler);
+                    $('#prev_slide').click(prevClickHandler);
+                    $('#mask-left').bind("mouseenter", hoverLeftEnter).bind("mouseleave", hoverLeftLeave);
+                    $('#mask-right').bind("mouseenter", hoverRightEnter).bind("mouseleave", hoverRightLeave);
+                    $('.'+paginator_id+' li a.slide-jump').bind("click", bindPaginationClick);
+                });
+                $(mainContainer).clearQueue();
+                $('#next_slide').clearQueue();
+                $('#prev_slide').clearQueue();
+                $(mainContainer).css('left','0px');
+                $('.'+paginator_id+' li').removeClass("current");
+                slideLi.removeClass("current");
+                startCycle();
+            }
         }
 
         function moveSlide(dir, n) {
