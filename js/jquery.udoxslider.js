@@ -27,13 +27,16 @@
         var paginator_id = 'sliderPag';
         var active_slide = undefined;
         var cycleTimer;
-        console.log('How man Lis' + liCount);
 
         //Global styles setup
         $.easing.def = "easeInOutCirc";
-        mainContainer.css({'width':+slidemeWidth+'px'});
+        if (liCount > 1) {
+            mainContainer.css({'width':+slidemeWidth+'px'});
+            mainContainer.css('left','0px');
+        }else{
+            mainContainer.css({'width':+settings['liWidth']+'px'});
+        }
         mainContainer.css({'height':+settings['liHeight']+'px'});
-        mainContainer.css('left','0px');
         slideLi.css({'width':+settings['liWidth']+'px', 'height':+settings['liHeight']+'px'});
         slideLi.css({'display':'block'});
         mainContainerParent.css({
@@ -52,15 +55,15 @@
         //Function called after page loads
         $(window).load(
             function() {
-                if (liCount > 1) {
+                if (liCount == 1) {
+                    mainContainer.addClass('static_one_slide');
+                }else{
                     findMiddle();
                     var windowSize = $('body').width();
                     var slide_before_middle = settings['offset']-1;
                     var visble_next_slide = settings['liWidth'] - centerView;
                     var left_spacing = 0-(slide_before_middle*settings['liWidth'])-visble_next_slide;
                     mainContainer.css({'margin-left': +left_spacing});
-                }else{
-                    mainContainer.addClass('static_one_slide');
                 }
             }
         )
@@ -110,6 +113,7 @@
                 var cnt = 1;
                 slideLi.each(function (){
                     $(this).attr('id', 'slideno-'+cnt).children('.image-data').append('<h2>Slide#'+cnt+'</h2>');
+                    $(this).attr('class', 'real_slide');
                     $('.'+paginator_id).append('<li class="notCurrent-'+cnt+'"><a href="#" class="slide-jump" id="slide-target-'+cnt+'">'+cnt+'</a></li>');
                     cnt++;
                 });
@@ -175,6 +179,7 @@
 
         function moveSlider(override_dir, step) {
             if (liCount > 1) {
+                $('li.clone').remove();
                 //Calls all other functions and actually moves slider
                 if(override_dir==undefined) {
                     move_direction = settings['direction'];
